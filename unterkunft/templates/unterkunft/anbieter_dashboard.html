@@ -1,0 +1,45 @@
+<h1>Meine Unterkünfte</h1>
+
+<a href="{% url 'unterkunft_erstellen' %}" style="background-color: green; color: white; padding: 10px; text-decoration: none; border-radius: 5px;">
+    + Neue Unterkunft hinzufügen
+</a>
+<br><br>
+
+<ul>
+  {% for u in unterkuenfte %}
+    <li>
+        <a href="/{{ u.id }}/">{{ u.titel }}</a> - {{ u.preis_pro_nacht }} €
+    </li>
+  {% empty %}
+    <li>Keine Unterkünfte vorhanden.</li>
+  {% endfor %}
+</ul>
+<hr>
+<hr>
+<form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button type="submit">Ausloggen</button>
+</form>
+
+<hr>
+<h2>Eingegangene Buchungen</h2>
+<table border="1">
+    <tr>
+        <th>Unterkunft</th>
+        <th>Gast</th>
+        <th>Von</th>
+        <th>Bis</th>
+        <th>Status</th>
+    </tr>
+    {% for b in buchungen %}
+    <tr>
+        <td>{{ b.unterkunft.titel }}</td>
+        <td>{{ b.nutzer.username }}</td>
+        <td>{{ b.startdatum }}</td>
+        <td>{{ b.enddatum }}</td>
+        <td>{{ b.status }}</td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5">Noch keine Buchungen vorhanden.</td></tr>
+    {% endfor %}
+</table>

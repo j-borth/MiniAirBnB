@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unterkunft buchen</title>
+</head>
+<body>
+    <h1>Buchung für: {{ unterkunft.titel }}</h1>
+    <p>Anbieter: {{ unterkunft.anbieter.username }}</p>
+    <p>Preis pro Nacht: {{ unterkunft.preis_pro_nacht }} €</p>
+    
+    <hr>
+
+    <form method="post">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+        
+        <button type="submit" style="background-color: green; color: white; padding: 10px;">
+            Buchung verbindlich abschicken
+        </button>
+    </form>
+
+    <br>
+    <a href="{% url 'unterkunft_detail' unterkunft.id %}">Abbrechen und zurück</a>
+</body>
+</html>

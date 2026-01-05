@@ -1,0 +1,23 @@
+<h1>{{ unterkunft.name }}</h1>
+<p>{{ unterkunft.beschreibung }}</p>
+<p>Preis: {{ unterkunft.preis_pro_nacht }} €</p>
+{% if user.is_authenticated and user.username == unterkunft.anbieter.username %}
+    <a href="/anbieter/unterkuenfte/">Zurück zu meinem Dashboard</a>
+{% else %}
+    <a href="/">Zurück zur Übersicht</a>
+{% endif %}
+
+<a href="{% url 'buchung_erstellen' unterkunft.id %}" style="background-color: blue; color: white; padding: 10px; text-decoration: none; border-radius: 5px;">
+    Diese Unterkunft jetzt buchen
+</a>
+
+<hr>
+<h3>Diese Unterkunft buchen</h3>
+{% if user.is_authenticated %}
+    <p>Geben Sie Ihr Reisedatum ein, um diese Unterkunft zu reservieren:</p>
+    <a href="{% url 'buchung_erstellen' unterkunft.id %}" style="background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block;">
+        Jetzt Buchung anfragen
+    </a>
+{% else %}
+    <p><a href="/admin/login/">Loggen Sie sich ein</a>, um eine Buchung vorzunehmen.</p>
+{% endif %}

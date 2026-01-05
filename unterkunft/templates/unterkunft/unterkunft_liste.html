@@ -1,0 +1,28 @@
+<h1>Unsere Unterkünfte</h1>
+
+{% if user.is_authenticated %}
+    <p>Hallo <strong>{{ user.username }}</strong>! Schön, dass du da bist.</p>
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+{% else %}
+    <a href="{% url 'login' %}">Einloggen zum Buchen</a>
+{% endif %}
+
+<hr>
+
+{% for u in unterkuenfte %}
+    <div style="margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 10px;">
+        <h3><a href="{% url 'unterkunft_detail' u.id %}">{{ u.titel }}</a></h3>
+        
+        <p>{{ u.beschreibung|truncatewords:20 }}</p>
+        <p><strong>Preis: {{ u.preis_pro_nacht }} €</strong></p>
+        
+        <a href="{% url 'unterkunft_detail' u.id %}">Details & Verfügbarkeit ansehen</a>
+    </div>
+{% endfor %}
+
+</ul>
+<a href="/admin/login/">Zum Login (für Anbieter/Admins)</a>
+
