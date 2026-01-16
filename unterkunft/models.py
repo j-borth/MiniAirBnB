@@ -16,7 +16,7 @@ class Unterkunft(models.Model):
         return self.titel 
 
 from django.db import models
-from django.contrib.auth.models import User  # Für die Bucher
+from django.contrib.auth.models import User
 
 class Buchung(models.Model):
     unterkunft = models.ForeignKey('Unterkunft', on_delete=models.CASCADE)
@@ -27,7 +27,7 @@ class Buchung(models.Model):
 
     class Meta:
         verbose_name = 'Buchung'
-        verbose_name_plural = 'Buchungen' # Das hier korrigiert die Anzeige im Admin
+        verbose_name_plural = 'Buchungen'
 
     STATUS_CHOICES = [
         ('offen', 'Offen'),

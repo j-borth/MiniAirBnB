@@ -54,7 +54,7 @@ def buchung_erstellen(request, id):
 @login_required
 def anbieter_dashboard(request):
     meine_unterkuenfte = Unterkunft.objects.filter(anbieter=request.user)
-    # Das hier ist der "Magic-Befehl": Hol mir alle Buchungen für meine Unterkünfte
+    
     meine_buchungen = Buchung.objects.filter(unterkunft__anbieter=request.user)
     
     return render(request, 'unterkunft/anbieter_dashboard.html', {
